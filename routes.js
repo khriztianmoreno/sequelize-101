@@ -21,9 +21,9 @@ module.exports = (app) => {
   app.use(bodyParser.json());
   app.use(methodOverride());
 
-  app.use('/api/user', user)
-  app.use('/api/company', company)
-  app.use('/api/product', product)
+  app.use('/api/users', user)
+  app.use('/api/companies', company)
+  app.use('/api/products', product)
 
   app.get('/', (req, res) => {
     res.status(200).send({ message: 'Hi I am @Khriztianmoreno!' })
