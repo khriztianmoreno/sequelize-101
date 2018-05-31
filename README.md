@@ -1,5 +1,5 @@
 # Sequelize 101
-Code for my Sequelize 101 talk.
+> Code for my Sequelize 101 talk.
 
 Hello, and welcome! This tutorial covers the basics of CRUD operations and simple examples using the Node ORM Sequelize. We will use Express.js to build out an API, but the focus here is Sequelize. I will assume you have PostgreSQL installed on your machine, and that you're using Node version `^8.10`
 
