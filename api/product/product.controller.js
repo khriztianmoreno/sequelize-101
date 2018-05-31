@@ -3,7 +3,7 @@
 // https://github.com/Starcounter-Jack/JSON-Patch
 const jsonpatch = require('fast-json-patch')
 
-const { Company, User } = require('../../sqldb');
+const { Product } = require('../../sqldb');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -59,36 +59,35 @@ function handleError(res, statusCode) {
  * Get list of companies
  */
 function index(req, res) {
-  return Company.findAll({include: [User]})
+  return Product.findAll({include: [User]})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 /**
- * Creates a new company
+ * Creates a new Product
  */
 function create(req, res) {
-  return Company.create(req.body)
+  return Product.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
 /**
- * Get a single Company
+ * Get a single Product
  */
 function show(req, res, next) {
   const { id } = req.params;
 
-  return Company.findAll({
-    where: { id },
-    include: [User]
+  return Product.findAll({
+    where: { id }
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Upserts the given Company in the DB at the specified ID
+// Upserts the given product in the DB at the specified ID
 function upsert(req, res) {
   const { id } = req.params;
 
@@ -96,12 +95,12 @@ function upsert(req, res) {
     Reflect.deleteProperty(req.body, 'id');
   }
 
-  return Company.upsert({ where: { id } })
+  return Product.upsert({ where: { id } })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Updates an existing Company in the DB
+// Updates an existing Product in the DB
 function patch(req, res) {
   const { id } = req.params;
 
@@ -109,7 +108,7 @@ function patch(req, res) {
     Reflect.deleteProperty(req.body, 'id');
   }
 
-  return Company.find({ where: { id } })
+  return Product.find({ where: { id } })
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
@@ -117,18 +116,17 @@ function patch(req, res) {
 }
 
 /**
- * Deletes a Company
+ * Deletes a Product
  * restriction: 'admin'
  */
 function destroy(req, res) {
   const { id } = req.params;
 
-  return Company.find({ where: { id } })
+  return Product.find({ where: { id } })
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
 }
-
 
 module.exports = {
   index,
