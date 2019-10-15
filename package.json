@@ -9,7 +9,7 @@
   "author": "Cristian Moreno <khriztianmoreno@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "1.19.3"
+    "nodemon": "1.19.4"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
